@@ -1,0 +1,54 @@
+.character-sheet-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .general-card {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 20px; // Adjust margin as needed
+  }
+  
+  /* Flex container for attributes-card and skills-card */
+  .cards-container {
+    display: flex;
+    justify-content: space-evenly; /* Adjust alignment as needed */
+    width: 71.5%; /* Adjust the width as needed */
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+  
+  .attributes-card,
+  .skills-card {
+    width: 50%; /* Adjust width to leave some space between cards */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px; /* Adjust margin as needed */
+  }
+  
+  .merits-card {
+    width: 70%;
+    margin-bottom: 20px; // Adjust margin as needed
+    margin-left: 15%;
+    margin-right:15%;
+  }
+
+  .mat-table {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  /* Add responsive styles for smaller screens if necessary */
+  @media screen and (max-width: 768px) {
+    .attributes-card,
+    .skills-card,
+    .merits-card,
+    .mat-table,
+    .cards-container {
+      width: 100%;
+    }
+  }
+  

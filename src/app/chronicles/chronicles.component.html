@@ -1,0 +1,24 @@
+<!-- chronicles.component.html -->
+<img class="banner" src="../../assets/img/codLogo.png" alt="COD Logo"/>
+<div class="actions">
+  <a mat-raised-button [routerLink]="['/']" class="nav-link active">Home</a>
+  <button mat-raised-button (click)="randomMortal()">Create Random</button>
+  <!-- <a mat-raised-button routerLink="/chronicles/find-all">Find All</a> -->
+  <button mat-raised-button (click)="findAll()">Find All</button>
+  <a mat-raised-button routerLink="/chronicles/find-one">Find One</a>
+  <a mat-raised-button routerLink="/chronicles/delete-all">Delete All</a>
+  <a mat-raised-button routerLink="/chronicles/delete-one">Delete One</a>
+</div>
+
+<div *ngIf="option == 'find-all'">
+  <mat-paginator [length]="resultData.length" [pageSize]="pageSize" (page)="getPaginatorData($event)">
+  </mat-paginator>
+  <div *ngFor="let mortalSheet of resultData | slice: lowValue : highValue" class="character-sheet-container">
+    <mortal-sheet [mortalSheet]="mortalSheet"></mortal-sheet>
+  </div>
+</div>
+<div *ngIf="option == 'random'">
+  <mortal-sheet [mortalSheet]="resultData[0]"></mortal-sheet>
+</div>
+
+

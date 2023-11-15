@@ -1,0 +1,10 @@
+<!-- home.component.html -->
+<div>
+    <!-- Add a banner or any other content for the home page -->
+    <img class="banner" src="../../assets/img/codLogo.png" alt="COD Logo">
+    <button mat-raised-button [matMenuTriggerFor]="gameLines">Game Lines</button>
+    <mat-menu #gameLines="matMenu">
+      <button mat-button (click)="navigateToCoD()">Chronicles of Darkness</button>
+      <button mat-button (click)="navigateToVtR()">Vampire: The Requiem</button>
+    </mat-menu>
+  </div>

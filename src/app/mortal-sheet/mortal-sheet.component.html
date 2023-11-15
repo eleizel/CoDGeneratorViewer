@@ -1,0 +1,81 @@
+<mat-card class="general-card">
+    <mat-card-title>{{ mortalSheet.sheet.name }}</mat-card-title>
+    <mat-card-subtitle>Player: {{ mortalSheet.sheet.player }}</mat-card-subtitle>
+    <mat-card-content>
+      <p><strong>Age: </strong> {{ mortalSheet.sheet.age }}</p>
+      <p><strong>Virtue: </strong> {{ mortalSheet.human.virtue }}</p>
+      <p><strong>Vice: </strong> {{ mortalSheet.human.vice }}</p>
+      <p><strong>Concept: </strong> {{ mortalSheet.sheet.concept }}</p>
+      <p><strong>Chronicle: </strong> {{ mortalSheet.sheet.chronicle }}</p>
+      <p><strong>Faction: </strong> {{ mortalSheet.human.faction }}</p>
+      <p><strong></strong></p>
+    </mat-card-content>
+  </mat-card>
+  <!-- Flex container for attributes-card and skills-card -->
+  <div class="cards-container">
+    <!-- Attributes Table -->
+    <mat-card class="attributes-card">
+      <mat-card-title>Attributes</mat-card-title>
+      <mat-table [dataSource]="transformAttributesToArray(mortalSheet.attributes)" class="mat-elevation-z8">
+
+        <!-- Attribute Columns -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let attribute">{{ attribute.name }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="value">
+          <mat-header-cell *matHeaderCellDef>Value</mat-header-cell>
+          <mat-cell *matCellDef="let attribute">{{ attribute.value }}</mat-cell>
+        </ng-container>
+
+        <!-- Define the table rows -->
+        <mat-row *matRowDef="let row; columns: ['name', 'value'];"></mat-row>
+      </mat-table>
+    </mat-card>
+
+    <!-- Skills Table -->
+    <mat-card class="skills-card">
+      <mat-card-title>Skills</mat-card-title>
+      <mat-table [dataSource]="transformSkillsToArray(mortalSheet.skills)" class="mat-elevation-z8">
+
+        <!-- Skill Columns -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let skill">{{ skill.name }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="value">
+          <mat-header-cell *matHeaderCellDef>Value</mat-header-cell>
+          <mat-cell *matCellDef="let skill">{{ skill.value }}</mat-cell>
+        </ng-container>
+
+        <!-- Define the table rows -->
+        <mat-row *matRowDef="let row; columns: ['name', 'value'];"></mat-row>
+      </mat-table>
+    </mat-card>
+  </div>
+
+  <!-- Merits Table -->
+  <mat-card class="merits-card">
+    <mat-card-title>Merits</mat-card-title>
+    <mat-table [dataSource]="mortalSheet.merits" class="mat-elevation-z8">
+
+      <!-- Merit Columns -->
+      <ng-container matColumnDef="nameRating">
+        <mat-header-cell *matHeaderCellDef>Name + Rating</mat-header-cell>
+        <mat-cell *matCellDef="let merit">
+          <strong>{{ merit.name }} ({{ merit.rating }}):</strong>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell *matCellDef="let merit">{{ merit.description }}</mat-cell>
+      </ng-container>
+
+      <!-- Define the table rows -->
+      <mat-header-row *matHeaderRowDef="['nameRating', 'description']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['nameRating', 'description'];"></mat-row>
+    </mat-table>
+  </mat-card>
