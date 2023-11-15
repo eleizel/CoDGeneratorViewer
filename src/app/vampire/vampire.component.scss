@@ -1,0 +1,20 @@
+.mat-paginator {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+  
+  
+  
+  .find-one-card,
+  .error-card {
+    width: 70%;
+    margin-top: 20px;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 20px; // Adjust margin as needed
+  }
+  
+  .error-card {
+    background-color: red;
+  }

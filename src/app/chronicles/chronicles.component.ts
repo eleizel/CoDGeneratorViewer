@@ -1,7 +1,7 @@
 // chronicles.component.ts
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { MortalService } from '../chronicles.service';
-import { MortalSheet, Skills, Attributes } from '../app.component'; 
+import { MortalSheet} from '../app.component'; 
 import { PageEvent } from '@angular/material/paginator';
 import { catchError, throwError } from 'rxjs';
 

@@ -1,0 +1,132 @@
+<div class="vampire-sheet-container">
+    <mat-card class="general-card ">
+      <mat-card-title>{{ vampireSheet.sheet.name }}</mat-card-title>
+      <mat-card-subtitle>Player: {{ vampireSheet.sheet.player }} (id: {{ vampireSheet.vampire.id}})</mat-card-subtitle>
+      <mat-card-content>
+        <p><strong>Age: </strong> {{ vampireSheet.sheet.age }}</p>
+        <p><strong>Mask: </strong> {{ vampireSheet.vampire.mask }}</p>
+        <p><strong>Dirge: </strong> {{ vampireSheet.vampire.dirge }}</p>
+        <p><strong>Concept: </strong> {{ vampireSheet.sheet.concept }}</p>
+        <p><strong>Chronicle: </strong> {{ vampireSheet.sheet.chronicle }}</p>
+        <p><strong>Clan: </strong> {{ vampireSheet.vampire.clanId }}</p>
+        <p><strong>Covenant: </strong> {{ vampireSheet.vampire.covenantId }}</p>
+        <p><strong>Blood Potency: </strong> {{ vampireSheet.vampire.bloodPotency }}</p>
+      </mat-card-content>
+    </mat-card>
+    <!-- Flex container for attributes-card and skills-card -->
+    <div class="cards-container">
+      <!-- Attributes Table -->
+      <mat-card class="attributes-card">
+        <mat-card-title>Attributes</mat-card-title>
+        <mat-card-content>
+          <mat-table [dataSource]="transformAttributesToArray(vampireSheet.attributes)" class="mat-elevation-z8">
+  
+            <!-- Attribute Columns -->
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+              <mat-cell *matCellDef="let attribute">{{ attribute.name }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="value">
+              <mat-header-cell *matHeaderCellDef>Value</mat-header-cell>
+              <mat-cell *matCellDef="let attribute">{{ attribute.value }}</mat-cell>
+            </ng-container>
+  
+            <!-- Define the table rows -->
+            <mat-row *matRowDef="let row; columns: ['name', 'value'];"></mat-row>
+          </mat-table>
+          <mat-card class="derived-card mat-elevation-z8">
+            <mat-card-title>Other Traits</mat-card-title>
+            <mat-card-content>
+              <p><strong>Health: </strong> {{ vampireSheet.sheet.health }}</p>
+              <p><strong>Willpower: </strong> {{ vampireSheet.sheet.willpower }}</p>
+              <p><strong>Size: </strong> {{ vampireSheet.sheet.size }}</p>
+              <p><strong>Speed: </strong> {{ vampireSheet.sheet.speed }}</p>
+              <p><strong>Defense: </strong> {{ vampireSheet.sheet.defense }}</p>
+              <p><strong>Initiative Mod: </strong> {{ vampireSheet.sheet.initiative }}</p>
+            </mat-card-content>
+          </mat-card>
+        </mat-card-content>
+      </mat-card>
+  
+      <!-- Skills Table -->
+      <mat-card class="skills-card">
+        <mat-card-title>Skills</mat-card-title>
+        <mat-card-content>
+          <mat-table [dataSource]="transformSkillsToArray(vampireSheet.skills)" class="mat-elevation-z8">
+  
+            <!-- Skill Columns -->
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+              <mat-cell *matCellDef="let skill">{{ skill.name }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="value">
+              <mat-header-cell *matHeaderCellDef>Value</mat-header-cell>
+              <mat-cell *matCellDef="let skill">{{ skill.value }}</mat-cell>
+            </ng-container>
+  
+            <!-- Define the table rows -->
+            <mat-row *matRowDef="let row; columns: ['name', 'value'];"></mat-row>
+          </mat-table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  
+    <!-- Merits Table -->
+    <mat-card class="merits-card">
+      <mat-card-title>Merits</mat-card-title>
+      <mat-card-content>
+        <mat-table [dataSource]="vampireSheet.merits" class="mat-elevation-z8">
+  
+          <!-- Merit Columns -->
+          <ng-container matColumnDef="nameRating">
+            <mat-header-cell *matHeaderCellDef>Name + Rating</mat-header-cell>
+            <mat-cell *matCellDef="let merit">
+              <strong>{{ merit.name }} ({{ merit.rating }}):</strong>
+            </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+            <mat-cell *matCellDef="let merit">{{ merit.description }}</mat-cell>
+          </ng-container>
+  
+          <!-- Define the table rows -->
+          <mat-header-row *matHeaderRowDef="['nameRating', 'description']"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ['nameRating', 'description'];"></mat-row>
+        </mat-table>      
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Disciplines Table -->
+    <mat-card class="disciplines-card">
+      <mat-card-title>Disciplines</mat-card-title>
+      <mat-card-content>
+        <mat-table [dataSource]="vampireSheet.disciplines" class="mat-elevation-z8">
+  
+          <!-- Merit Columns -->
+          <ng-container matColumnDef="disciplineNameRank">
+            <mat-header-cell *matHeaderCellDef>Discipline (rank)</mat-header-cell>
+            <mat-cell *matCellDef="let discipline">
+              <strong>{{ discipline.disciplineName }} ({{ discipline.rank }}):</strong>
+            </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let discipline">{{ discipline.name }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+            <mat-cell *matCellDef="let discipline">{{ discipline.description }}</mat-cell>
+          </ng-container>
+  
+          <!-- Define the table rows -->
+          <mat-header-row *matHeaderRowDef="['disciplineNameRank', 'name', 'description']"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ['disciplineNameRank','name', 'description'];"></mat-row>
+        </mat-table>      
+      </mat-card-content>
+    </mat-card>
+  </div>

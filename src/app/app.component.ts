@@ -10,6 +10,17 @@ interface Human {
   sheetId: number;
 }
 
+interface Vampire {
+  id: number;
+  bloodPotency: number;
+  humanity: number;
+  mask: string;
+  dirge: string;
+  clanId: string;
+  bloodlineId: string;
+  covenantId: string;
+}
+
 export interface Sheet {
   id: number;
   name: string;
@@ -78,12 +89,32 @@ export interface Merit {
   prerequisites: string;
 }
 
+export interface Discipline {
+  disciplineRankId: number;
+  disciplineName: string;
+  rank: number;
+  name: string;
+  cost: string;
+  prerequisites: string;
+  description: string;
+  dicePool: string;
+}
+
 export interface MortalSheet {
   human: Human;
   sheet: Sheet;
   attributes: Attributes;
   skills: Skills;
   merits: Merit[];
+}
+
+export interface VampireSheet {
+  vampire: Vampire;
+  sheet: Sheet;
+  attributes: Attributes;
+  skills: Skills;
+  merits: Merit[];
+  disciplines: Discipline[];
 }
 
 @Component({

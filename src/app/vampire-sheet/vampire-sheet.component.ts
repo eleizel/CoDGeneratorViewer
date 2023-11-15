@@ -1,16 +1,20 @@
-// character-sheet-card.component.ts
-import { Component, Input } from '@angular/core';
-import { MortalSheet, Skills, Attributes } from '../app.component'; 
+import { Component, OnInit, Input } from '@angular/core';
+import { VampireSheet, Skills, Attributes } from '../app.component'; 
 
 @Component({
-  selector: 'mortal-sheet',
-  templateUrl: './mortal-sheet.component.html',
-  styleUrls: ['./mortal-sheet.component.scss'],
+  selector: 'vampire-sheet',
+  templateUrl: './vampire-sheet.component.html',
+  styleUrls: ['./vampire-sheet.component.scss']
 })
+export class VampireSheetComponent implements OnInit {
+  @Input() vampireSheet!: VampireSheet;
 
-export class MortalSheetComponent {
-  @Input() mortalSheet!: MortalSheet;
-  
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
   transformSkillsToArray(skills: Skills): { name: string; value: number }[] {
     return Object.entries(skills)
                     .filter(([name])=> name!== 'id')
@@ -22,5 +26,5 @@ export class MortalSheetComponent {
                   .filter(([name])=> name!== 'id')
                   .map(([name, value]) => ({ name, value }));
   }
-}
 
+}

@@ -1,9 +1,48 @@
 <img class="banner" src="../../assets/img/vtrLogo.png" alt="COD Logo"/>
 <div class="actions">
     <a mat-raised-button [routerLink]="['/']" class="nav-link active">Home</a>
-    <button mat-raised-button>Create Random</button>
-    <button mat-raised-button>Find All</button>
-    <button mat-raised-button>Find One</button>
+    <button mat-raised-button (click)="createRandom()">Create Random</button>
+    <button mat-raised-button (click)="findAll()">Find All</button>
+    <button mat-raised-button (click)="findOneForm()">Find One</button>
     <button mat-raised-button>Delete All</button>
     <button mat-raised-button>Delete One</button>
-  </div>
+</div>
+
+<div *ngIf="error !== ''">
+    <mat-card class="error-card">
+        <mat-card-content>{{error}}</mat-card-content>
+    </mat-card>
+</div>
+
+<div *ngIf="option == 'find-all'">
+    <mat-paginator [length]="resultData.length" [pageSize]="pageSize" (page)="getPaginatorData($event)">
+    </mat-paginator>
+    <div *ngFor="let vampireSheet of resultData | slice: lowValue : highValue" class="character-sheet-container">
+        <vampire-sheet [vampireSheet]="vampireSheet"></vampire-sheet>
+    </div>
+</div>
+
+<div *ngIf="option == 'random' || option == 'find-one'">
+  <vampire-sheet [vampireSheet]="resultData[0]"></vampire-sheet>
+</div>
+
+<div *ngIf="option == 'find-one-form'">
+  <mat-card class="find-one-card">
+    <mat-card-title>Find one</mat-card-title>
+    <form (ngSubmit)="findOne()" #findOneForm="ngForm" class="find-one-form">
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          type="number"
+          placeholder="Enter a valid Id"
+          [(ngModel)]="inputNumber"
+          name="inputNumber"
+          required
+        />
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!findOneForm.form.valid">
+        Send
+      </button>
+    </form>
+  </mat-card>
+</div>
