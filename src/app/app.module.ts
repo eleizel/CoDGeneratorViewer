@@ -23,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { VampireComponent } from './vampire/vampire.component';
 import { VampireSheetComponent } from './vampire-sheet/vampire-sheet.component';
+import { CommonSheetComponent } from './common-sheet/common-sheet.component';
 
  
 @NgModule({
@@ -32,7 +33,8 @@ import { VampireSheetComponent } from './vampire-sheet/vampire-sheet.component';
     ChroniclesComponent,
     MortalSheetComponent,
     VampireComponent,
-    VampireSheetComponent
+    VampireSheetComponent,
+    CommonSheetComponent
   ],
   imports: [
     BrowserModule,
