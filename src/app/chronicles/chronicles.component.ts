@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MortalService } from '../chronicles.service';
 import { MortalSheet, Skills, Attributes } from '../app.component'; 
 import { PageEvent } from '@angular/material/paginator';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-chronicles',
@@ -13,6 +14,8 @@ import { PageEvent } from '@angular/material/paginator';
 export class ChroniclesComponent implements OnInit {
   resultData: MortalSheet[] = [];
   option: any; 
+  error : string = '';
+  inputNumber!: number;
   pageIndex:number = 0;
   pageSize:number = 1;
   lowValue:number = 0;
@@ -31,18 +34,46 @@ export class ChroniclesComponent implements OnInit {
       this.resultData[0]=data;
       this.option = 'random';
       console.log(this.option);
+      console.log(data);    
     })
   }
 
   findAll() {
     this.chroniclesService.getAllMortals()
     .subscribe((data) => {
-      console.log(data);
       this.resultData = data;
       this.option = 'find-all';
       console.log(this.option);
+      console.log(data);    
     })
   }
+
+  findOneForm() {
+    this.option = 'find-one-form'
+    this.resultData = [];
+    console.log(this.option);
+  }
+
+  findOne() {
+    console.log('Find one method')
+    this.chroniclesService.getMortalById(this.inputNumber)
+      .pipe (
+        catchError((error) => {
+          console.error('Error occured: ', error);
+          this.error = 'Mortal with id '+this.inputNumber+' not found.';
+          return throwError(error);
+        })
+      )
+      .subscribe((data) => {
+        this.resultData[0] = data;
+        this.option = 'find-one';
+        this.error = '';
+        console.log(this.option);
+        console.log(data);
+      });
+    
+  }
+
   getPaginatorData(event: { pageIndex: number; }){
     console.log(event);
     if(event.pageIndex === this.pageIndex + 1){

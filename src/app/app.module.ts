@@ -16,14 +16,21 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { MortalSheetComponent } from './mortal-sheet/mortal-sheet.component';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { VampireComponent } from './vampire/vampire.component';
+
  
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ChroniclesComponent,
-    MortalSheetComponent
+    MortalSheetComponent,
+    VampireComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +44,11 @@ import { MortalSheetComponent } from './mortal-sheet/mortal-sheet.component';
     MatListModule,
     MatTableModule,
     MatCardModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FormsModule,
+    MatInputModule,
+    MatExpansionModule,
+    MatIconModule
   ],
   providers: [MortalService],
   bootstrap: [AppComponent]

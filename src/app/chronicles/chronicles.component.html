@@ -5,9 +5,15 @@
   <button mat-raised-button (click)="randomMortal()">Create Random</button>
   <!-- <a mat-raised-button routerLink="/chronicles/find-all">Find All</a> -->
   <button mat-raised-button (click)="findAll()">Find All</button>
-  <a mat-raised-button routerLink="/chronicles/find-one">Find One</a>
+  <button mat-raised-button (click)="findOneForm()">Find One</button>
   <a mat-raised-button routerLink="/chronicles/delete-all">Delete All</a>
   <a mat-raised-button routerLink="/chronicles/delete-one">Delete One</a>
+</div>
+
+<div *ngIf="error !== ''">
+  <mat-card class="error-card">
+    <mat-card-content>{{error}}</mat-card-content>
+  </mat-card>
 </div>
 
 <div *ngIf="option == 'find-all'">
@@ -17,8 +23,28 @@
     <mortal-sheet [mortalSheet]="mortalSheet"></mortal-sheet>
   </div>
 </div>
-<div *ngIf="option == 'random'">
+
+<div *ngIf="option == 'random' || option == 'find-one'">
   <mortal-sheet [mortalSheet]="resultData[0]"></mortal-sheet>
 </div>
 
-
+<div *ngIf="option == 'find-one-form'">
+  <mat-card class="find-one-card">
+    <mat-card-title>Find one</mat-card-title>
+    <form (ngSubmit)="findOne()" #findOneForm="ngForm" class="find-one-form">
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          type="number"
+          placeholder="Enter a valid Id"
+          [(ngModel)]="inputNumber"
+          name="inputNumber"
+          required
+        />
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!findOneForm.form.valid">
+        Send
+      </button>
+    </form>
+  </mat-card>
+</div>
